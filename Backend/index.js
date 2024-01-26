@@ -4,8 +4,7 @@ const { mongoose } = require('mongoose');
 
 const app=express();
 
-
-const db_link="mongodb+srv://vinayakrajqaz:iQkUnxrdkVaUsDQS@cluster0.wqnula8.mongodb.net/?retryWrites=true&w=majority"
+const db_link="mongodb+srv://<username>:<password>@cluster0.wqnula8.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(db_link)
 .then(function (db){
     console.log("db Connected")
@@ -17,10 +16,6 @@ mongoose.connect(db_link)
 
 app.listen(3000)
 
-
 app.get('/',(req,res)=>{
     res.send('<h1>Hello <h1>')
 })
-
-
-
