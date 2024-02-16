@@ -1,4 +1,4 @@
-const userModel=require("../models/user")
+const userModel=require("../models/contractor")
 const bcrypt=require('bcrypt')
 const jwt=require("jsonwebtoken")
 const SECRET_KEY="DKJFHJDFKGHDFKJHSKDHFKJSFJK"
@@ -8,7 +8,7 @@ const signup = async (req, res) => {
     // hashed Password
     // User creation
     // Token Generate
-    const { username, number, password } = req.body;
+    const { firstname,lastname, number, password } = req.body;
     try {
         const existingUser = await userModel.findOne({ number: number });
         if (existingUser) {
@@ -19,7 +19,9 @@ const signup = async (req, res) => {
         const result = await userModel.create({
             number: number,
             password: hashPassword,
-            username: username,
+            firstname: firstname,
+            lastname: lastname
+
         });
 
         const token = jwt.sign(

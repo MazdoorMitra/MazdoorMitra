@@ -1,7 +1,15 @@
 const mongoose =require('mongoose')
 
-const UserSchema=mongoose.Schema({
-    username:{
+const contractorSchema=mongoose.Schema({
+    firstname:{
+        type:String,
+        require:true
+    },
+    lastname:{
+        type:String,
+        require:true
+    },
+    number:{
         type:String,
         require:true
     },
@@ -9,10 +17,7 @@ const UserSchema=mongoose.Schema({
         type:String,
         require:true
     },
-    number:{
-        type:String,
-        require:true
-    }
+    
 },{timestamps:true})
 
-module.exports=mongoose.model("user",UserSchema)
+module.exports=mongoose.model("user",contractorSchema)
