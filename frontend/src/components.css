@@ -1,0 +1,295 @@
+:root
+{
+    --t1 : rgb(67, 98, 255);
+    --bordercolor : rgb(171, 171, 171);
+}
+
+
+
+.tile
+{
+    background-color: white;
+    color: black;
+    padding: 0.5em 1em 1em 1em;
+    margin: 0.5em;
+}
+
+
+.squircle
+{
+    border-radius: 0.3em;
+}
+
+.fitwidth
+{
+    width: fit-content;
+}
+
+.fillwidth
+{
+    width: auto;
+}
+
+.fitheight
+{
+    height: fit-content;
+}
+
+.fillheight
+{
+    height: 80%;
+}
+
+.shadow
+{
+    box-shadow: 0 0 0.5em 0.2em rgba(0, 0, 0, 0.153);
+}
+
+.horizontal
+{
+    display:flex;
+    flex-direction: row;
+    margin: 0.5em 0 0.5em 0.5em;
+}
+
+.vertical
+{
+    display:flex;
+    flex-direction: column;
+    margin: 0.5em;
+}
+
+.border1
+{
+    border: 0.1em solid var(--bordercolor);
+}
+
+.xlargefont
+{
+    font-size: 2em;
+}
+
+.largefont
+{
+    font-size: 1.3em;
+}
+
+.mediumfont
+{
+    font-size: 0.8em;
+}
+
+.smallfont
+{
+    font-size: 0.65em;
+}
+
+.xsmallfont
+{
+    font-size: 0.4em;
+}
+
+.floatstart {
+    align-self: self-start;
+}
+
+.floatend {
+    align-self: self-end;
+}
+
+.floatmid {
+    align-self: center;
+}
+
+.stdpadding
+{
+    padding: 0.5em 1em 1em 1em;
+}
+
+.badgepad
+{
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.active
+{
+    background-color: var(--t1);
+    color: white;
+}
+
+.inactive
+{
+    /* background-color: var(--t1);
+    color: white; */
+    opacity: 40%;
+}
+
+
+
+.stdmargin
+{
+    margin: 0.5em;
+}
+
+.stdmp
+{
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 0.5em;
+}
+
+
+.page {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.spacebw 
+{
+    justify-content: space-between;
+}
+
+.spaceev
+{
+    justify-content: space-evenly;
+}
+
+
+.topbar
+{
+    margin: 0;
+    padding: 0.5em;
+    width: auto;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: row;
+
+    box-shadow: 0 0 0.2em 0.25em rgba(0, 0, 0, 0.153);
+
+    justify-content: center;
+    /* margin-bottom: auto; */
+}
+
+.bb
+{
+    height: 1.5em;
+    width: 1.5em;
+
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+
+    padding: 0.1em;
+
+    /* background-color: black; */
+    float:inline-start;
+    cursor: pointer;
+
+    border-radius: 50%;
+    border: 0.05em solid black;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1em;
+}
+
+
+h1
+{
+    margin: 0;
+    font-weight: 400;
+    margin-bottom: 0.8em;
+    margin-right: 0.8em;
+    font-size: 1.5em;
+}
+
+h2
+{
+    margin: 0;
+    font-weight: 400;
+    margin-bottom: 0.4em;
+    margin-right: 0.4em;
+    font-size: 0.8em;
+}
+
+h3
+{
+    margin: 0;
+    font-weight: 400;
+    margin-bottom: 0.2em;
+    margin-right: 0.2em;
+    font-size: 0.4em;
+}
+
+p {
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0.5em;
+    text-align: left;
+    float: inline-start;
+}
+
+.metric {
+    font-size: 2.5em;
+    text-align: left;
+    font-weight: 600;
+}
+
+
+.sinfo{
+    margin-top: 0;
+    color: var(--bordercolor);
+    padding-left: 1em;
+}
+
+input {
+    all: unset;
+}
+
+button
+{
+    border: none;
+    background-color: var(--t1);
+    color: white;
+    padding: 0.5em 1.2em 0.5em 1.2em;
+    border-radius: 100em;
+    font-family: 'Segoe UI Light';
+    cursor: pointer;
+    text-align: center;
+}
+
+
+
+
+button:hover
+{
+    transform: scale(1.07);
+    box-shadow: 0 0 0.5em 0.2em rgba(0, 0, 0, 0.323);
+}
+
+
+.textinput
+{
+    background-color: white;
+    margin: 0.2em 0.5em 0 0;
+    padding: 0.3em 1em 0.4em 0.6em;
+}
+/* 
+.textinput:focus
+{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: 0 0 0.5em 0.2em rgba(0, 0, 0, 0.149);
+} */
+
