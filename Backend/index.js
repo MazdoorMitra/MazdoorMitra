@@ -1,6 +1,8 @@
 const express=require('express');
 const { mongoose } = require('mongoose');
 const userRouter = require('./routes/contractorRoutes');
+const cors=require('cors')
+
 
 
 const app=express();
@@ -16,10 +18,12 @@ mongoose.connect(db_link)
 
 //Middleware
 app.use(express.json());
+app.use(cors());
 app.use("/contractor",userRouter);
+
 
 
 app.get('/',(req,res)=>{
     res.send('<h1>Hello <h1>')
 })
-app.listen(3000)
+app.listen(4000)

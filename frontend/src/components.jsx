@@ -1,7 +1,4 @@
 import './components.css'
-
-
-
 /**
  * A simple tile component.
  * `other` is applied on the root div.
@@ -183,4 +180,3 @@ export function Page({ title, children, topbar, gap, classes, ...other })
         {gap}
     </div>;
 }
-
