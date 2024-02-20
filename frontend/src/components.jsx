@@ -2,39 +2,111 @@ import './components.css'
 
 
 
-//Simple tile
-export function Tile({ heading, width, children }) {
-    const head = heading ? <h2>{heading}</h2> : null;
+/**
+ * A simple tile component.
+ * `other` is applied on the root div.
+ * `classes` is applied on the root div.
+ */
+export function Tile({ title, children, classes, ...other }) {
 
-    return <div className={`tile shadow ${width} fitheight squircle`}>
-        {head}
+    title = title && <h4>{title}</h4>;
+
+    let cssclasses = 'vertical tile shadow fitheight squircle';
+    if (classes)
+    {
+        classes.forEach(element => {
+            cssclasses += (' ' + element);
+        });
+    }
+
+    return <div className={cssclasses} {...other}>
+        {title}
         {children}
     </div>;
 }
 
-//simple textbox
-export function TextBox({ hint, title })
+/**
+ * Simple textbox.
+ * `other` is applied on the inner `<input>` element.
+ * `textboxclasses` is applied on the `<input>` element.
+ * `divclasses` is applied on the root div.
+ */
+export function TextBox({ title, hint, textboxclasses, divclasses, ...other })
 {
-    const titlep = title ? <p className='smallfont startfloat'>{title}</p> : null;
+    title = title && <p className='smallfont startfloat'>{title}</p>;
     
-    return <div className='vertical fitwidth'>
-        {titlep}
-        <input type='text' className='textinput border1 mediumfont squircle' placeholder={hint}/>
+    let textclasses = 'textinput border1 squircle';
+    if (textboxclasses)
+    {
+        textboxclasses.forEach(element => {
+            textclasses += (' ' + element);
+        });
+    }
+
+    let divboxclasses = 'vertical';
+    if (divclasses)
+    {
+        divclasses.forEach(element => {
+            divboxclasses += (' ' + element);
+        });
+    }
+
+    return <div className={divboxclasses}>
+        {title}
+        <input type='text' className={textclasses} placeholder={hint} {...other}/>
     </ div>;
 }
 
 
-//simple Container
-export function Container({ children, title, bordered, })
+/**
+ * A container that holds stuff vertically.
+ * `classes` is applied on the root div.
+ * `other` is applied on the root div.
+ */
+export function VContainer({ title, children, classes, ...other})
 {
-    const titlep = title ? <p className='largefont startfloat'>{title}</p> : null;
-    const classes = 'vertical fillwidth fitheight ' + (bordered === true ? 'border1 squircle stdmp' : '');
+    title = title && <p className='largefont startfloat'>{title}</p>;
     
-    return <div className={classes}>
-        {titlep}
+    let cssclasses = 'vertical autowidth fitheight';
+    if (classes)
+    {
+        classes.forEach(element => {
+            cssclasses += (' ' + element);
+        });
+    }
+    
+    return <div className={cssclasses} {...other}>
+        {title}
         {children}
     </div>;
 }
+
+
+/**
+ * A container that holds stuff horizontally.
+ * `classes` is applied on the root div.
+ * `other` is applied on the root div.
+ */
+export function HContainer({ title, children, classes, ...other})
+{
+    title = title && <p className='largefont startfloat'>{title}</p>;
+    
+    let cssclasses = 'horizontal autowidth fitheight';
+    if (classes)
+    {
+        classes.forEach(element => {
+            cssclasses += (' ' + element);
+        });
+    }
+    
+    return <div className={cssclasses} style={{margin : 0}} {...other}>
+        {title}
+        {children}
+    </div>;
+}
+
+
+
 
 
 export function Badge({ value, state, title, on, })
@@ -45,25 +117,70 @@ export function Badge({ value, state, title, on, })
 }
 
 
-export function Button({children, size, onClick})
+
+/**
+ * A simple button.
+ * `classes` is applied on the root `<button>` element.
+ * `other` is applied on the root `<button>` element.
+ */
+export function Button({children, classes, ...other})
 {
-    let sizev = size ? size : 'mediumfont';
-    return <button onClick = {onClick} className={`floatmid stdmargin ${sizev} fillwidth fitheight`}>{children}</button>;
+    let cssclasses = 'shadow floatmid stdmargin fitheight mediumfont fitwidth';
+    if (classes)
+    {
+        classes.forEach(element => {
+            cssclasses += (' ' + element);
+        });
+    }
+
+    return <button className={cssclasses} {...other}>
+        {children}
+    </button>;
 }
 
 
-
-export function Page({ children, title, topbar, addgap})
+/**
+ * A simple top navigation bar
+ */
+export function TopBar({ title })
 {
-    const top = topbar ? <div className='topbar'><div className='bb'>◁</div>{topbar}</div> : null;
-    const tit = title ? <h1 className='floatmid'><bold>{title}</bold></h1> : null;
-    const end = addgap === true ? <Container /> : null;
+    return <div className='topbar shadow'>
+        <div className='pointer horizontal width10p squircle'><p className='floatmid textaligncenter fillwidth'>❮</p></div>
+        <p className='floatmid mediumfont width90p textaligncenter'>{title}</p>
+    </div>;
+}
 
-    return <div className={`page ${top ? 'spacebw' : 'spaceev'}`}>
-        {top}
-        {tit}
+
+/**
+ * Main page component. Put everything else inside this.
+ * @param {title} title string value to display as the title.
+ * @param {topbar} topbar string value to display in the top nav bar. if not given, the bar is not shown.
+ * @param {gap} gap boolean value. if true, a gap is added at the end of the page.
+ * 
+ * `classes` is applied to the root div.
+ * `other` is applied to the root div.
+ */
+export function Page({ title, children, topbar, gap, classes, ...other })
+{
+    title = title && <h1 className='floatmid' style={{margin:'0.5em'}}>{title}</h1>;
+    topbar = topbar && <TopBar title = {topbar}></TopBar>;
+    gap = gap && <VContainer />;
+
+    //${topbar ? 'spacebw' : 'spaceev'}`
+    let cssclasses = `page`;
+    if (classes)
+    {
+        classes.forEach(element => {
+            cssclasses += (' ' + element);
+        });
+    }
+
+
+    return <div className={cssclasses} {...other}>
+        {topbar}
+        {title}
         {children}
-        {end}
+        {gap}
     </div>;
 }
 
