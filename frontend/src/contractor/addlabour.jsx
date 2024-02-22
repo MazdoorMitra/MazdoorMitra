@@ -3,7 +3,7 @@ import { Button, Page, TextBox } from '../components';
 import './addlabour.css'; // Import CSS file for additional styling
 import Header from './Header';
 import Footer from './footer';
-
+import axios from 'axios'; // Import Axios library
 function AddLabourPage() {
     // Sample existing labors
     const existingLabors = ['John Doe', 'Jane Smith', 'Bob Johnson'];
@@ -37,24 +37,27 @@ function AddLabourPage() {
     };
 
     // Function to handle registration form submission
-    const handleRegistrationSubmit = (event) => {
+    const handleRegistrationSubmit = async (event) => {
         event.preventDefault();
-        // Implement form submission logic for registering new labour
-        console.log('Form submitted for new labour:', {
-            firstName,
-            lastName,
-            phoneNumber,
-            wageRate,
-            wageRateType,
-            location
-        });
-        // Reset form fields after submission if needed
-        setFirstName('');
-        setLastName('');
-        setPhoneNumber('');
-        setWageRate('');
-        setWageRateType('');
-        setLocation('');
+        try {
+            const response = await axios.post('http://localhost:4000/contractor/newlabour', {
+                firstName,
+                lastName,
+                phoneNumber,
+                wageRate,
+                location
+            });
+            console.log('Response:', response.data);
+            // Reset form fields after successful submission
+            setFirstName('');
+            setLastName('');
+            setPhoneNumber('');
+            setWageRate('');
+            setWageRateType('');
+            setLocation('');
+        } catch (error) {
+            console.error('Error registering new labor:', error);
+        }
     };
 
     return (
