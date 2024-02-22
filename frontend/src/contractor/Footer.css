@@ -1,0 +1,33 @@
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #007bff; /* Blue background color */
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+    color: white; /* Text color */
+    z-index: 1000; /* Ensure the footer is above other content */
+}
+
+.footer-slot {
+    margin: 0 10px;
+    text-decoration: none;
+    color: white; /* Text color for links */
+}
+
+.footer-slot:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+/* Media query for smaller devices */
+@media only screen and (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+  
+    .footer-slot {
+        margin: 5px 0;
+    }
+}

@@ -4,7 +4,6 @@ const userRouter = require('./routes/contractorRoutes');
 const cors=require('cors')
 
 
-
 const app=express();
 const db_link="mongodb+srv://vinayakrajqaz:iQkUnxrdkVaUsDQS@cluster0.wqnula8.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(db_link)
@@ -20,6 +19,7 @@ mongoose.connect(db_link)
 app.use(express.json());
 app.use(cors());
 app.use("/contractor",userRouter);
+
 
 
 
