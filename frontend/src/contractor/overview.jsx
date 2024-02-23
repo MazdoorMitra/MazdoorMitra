@@ -1,41 +1,47 @@
-import { Tile, Page, VContainer, TextBox, Button, HContainer } from "../components";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Tile, Page, VContainer, Button } from "../components";
 import right from '../right.svg';
 import Header from "./Header";
-import Footer from "./footer";
 import { Link } from 'react-router-dom'; // Import Link for navigation
-
-// function OverviewSection() {
-//     return (
-//         <></>
-//     );
-// }
 
 function ContractorCard({ name, info, classes, path, ...other }) {
     return (
-        <Tile style={{ cursor: 'pointer' }} classes={classes} {...other}>
-            <HContainer>
-                <VContainer classes={['width90p']}>
-                    <p className="mediumfont floatstart" style={{ color: 'var(--t1)' }}>{name}</p>
-                    <p className="smallfont floatstart">{info}</p>
-                </VContainer>
-                <img src={right} style={{ height: '1.3em', transform: 'rotate(90deg)' }} className="floatmid" />
-            </HContainer>
-        </Tile>
+        <Link to="/contractor/dashboard"> {/* Added Link to navigate to /contractor/dashboard */}
+            <Tile style={{ cursor: 'pointer' }} classes={classes} {...other}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ flex: 1 }}>
+                        <p className="mediumfont" style={{ color: 'var(--t1)' }}>{name}</p>
+                        <p className="smallfont">{info}</p>
+                    </div>
+                    <img src={right} style={{ height: '1.3em', transform: 'rotate(90deg)' }} alt="Right arrow" />
+                </div>
+            </Tile>
+        </Link>
     );
 }
 
-//Defines a section of contractor cards.
 function ContractorsSection() {
-    const handler = () => { console.log('Clicked a card') };
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        // Fetch projects when component mounts
+        axios.get('http://localhost:4000/contractor/projects')
+            .then(response => {
+                setProjects(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching projects:', error);
+            });
+    }, []);
+
     return (
-        <VContainer  classes={['stdmargin']} style={{ marginTop: '3em' }}>
-            <Link to="/contractor/dashboard">
-             <ContractorCard name='Construction Site A' info='bruh' onClick={handler} />
-            </Link>
-            <ContractorCard name='Construction Site B' info='bruh' onClick={handler} />
-            <ContractorCard name='Construction Site C' info='bruh' onClick={handler} />
+        <VContainer classes={['stdmargin']} style={{ marginTop: '3em' }}>
+            {projects.map(project => (
+                <ContractorCard key={project._id} name={project.projectName} info={project.info} />
+            ))}
             <Link to="/contractor/newproject">
-                <ContractorCard name='Add New Project' onClick={handler} />
+                <Button classes={['stdmp']}>Add New Project</Button>
             </Link>
         </VContainer>
     );
@@ -46,15 +52,8 @@ export default function Overview() {
         <>
             <Header /> 
             <Page title='My Projects'>
-                {/* <OverviewSection /> */}
                 <ContractorsSection />
             </Page>
-            {/* <Footer /> */}
         </>
     );
 }
-
-
-<Link to="/contractor">
-                  <Button classes={['stdmp']} onClick={() => console.log("Project created!")}>Create Project</Button>
-                </Link>

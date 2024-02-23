@@ -1,23 +1,27 @@
-const userModel = require("../models/contractor");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = "DKJFHJDFKGHDFKJHSKDHFKJSFJK";
+const { Contractor } = require('../models/contractor');
+// controllers/labourController.js
 const { NewLabour } = require('../models/contractor');
+const {Project} =require('../models/contractor')
+
+
+const SECRET_KEY = "DKJFHJDFKGHDFKJHSKDHFKJSFJK";
 
 const signup = async (req, res) => {
     const { firstname, lastname, number, password } = req.body;
     try {
-        const existingUser = await userModel.findOne({ number: number });
+        const existingUser = await Contractor.findOne({ number: number });
         if (existingUser) {
             return res.status(400).json({ message: "User already exists" });
         }
 
         const hashPassword = await bcrypt.hash(password, 10);
-        const result = await userModel.create({
+        const result = await Contractor.create({
             number: number,
             password: hashPassword,
-            firstname: firstname,
-            lastname: lastname
+            firstName: firstname,
+            lastName: lastname
         });
 
         const token = jwt.sign(
@@ -35,7 +39,7 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
     const { number, password } = req.body;
     try {
-        const existingUser = await userModel.findOne({ number: number });
+        const existingUser = await Contractor.findOne({ number: number });
         if (!existingUser) {
             return res.status(404).json({ message: "User Not Found" });
         }
@@ -57,6 +61,8 @@ const signin = async (req, res) => {
     }
 };
 
+
+
 const newlabour = async (req, res) => {
     const { firstName, lastName, phoneNumber, wages, location } = req.body;
     try {
@@ -76,18 +82,11 @@ const newlabour = async (req, res) => {
         res.status(201).json({
             message: "New labor created successfully",
             labor: newLabour,
-            token: generateToken(newLabour) // Assuming you have a function to generate a token
         });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Something went wrong" });
     }
-};
-
-// Example function to generate token
-const generateToken = (labour) => {
-    // Implement your token generation logic here
-    return "example_token";
 };
 
 const getLabourNames = async (req, res) => {
@@ -100,4 +99,33 @@ const getLabourNames = async (req, res) => {
     }
 };
 
-module.exports = { signin, signup, newlabour, getLabourNames };
+const createProject = async (req, res) => {
+    try {
+        const { projectName, projectDescription, supervisorName, contactDetails } = req.body;
+        const project = await Project.create({
+            projectName,
+            projectDescription,
+            supervisorName,
+            contactDetails
+        });
+        res.status(201).json(project);
+    } catch (error) {
+        console.error('Error creating project:', error);
+        res.status(500).json({ message: 'Error creating project' });
+    }
+};
+
+const projects = async (req, res) => {
+    try {
+        const laborers = await Project.find({}, 'projectName');
+        res.status(200).json(laborers);
+    } catch (error) {
+        console.error('Error fetching laborers:', error);
+        res.status(500).json({ message: 'Error fetching laborers' });
+    }
+};
+
+
+
+module.exports = { signin, signup,newlabour, getLabourNames,createProject ,projects};
+
