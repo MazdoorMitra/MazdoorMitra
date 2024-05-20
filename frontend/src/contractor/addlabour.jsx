@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Page, TextBox } from '../components';
+import { Button, TextField, Select, MenuItem, FormControl, InputLabel, Grid, Typography, Paper } from '@mui/material';
 import './addlabour.css'; // Import CSS file for additional styling
 import Header from './Header';
 import Footer from './footer';
 import axios from 'axios'; // Import Axios library
+
 function AddLabourPage() {
     // Sample existing labors
-    const existingLabors = ['John Doe', 'Jane Smith', 'Bob Johnson'];
+    const existingLabors = ['Anuj', 'Anurag', 'Anuh'];
 
     // State to manage the selected labor and whether to show the registration form
     const [selectedLabor, setSelectedLabor] = useState('');
@@ -33,14 +34,14 @@ function AddLabourPage() {
 
     // Function to handle form submission for new labour
     const handleNewLabourSubmit = () => {
-        setShowRegistrationForm(true);
+        setShowRegistrationForm(!showRegistrationForm); // Toggle the state
     };
 
     // Function to handle registration form submission
     const handleRegistrationSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/contractor/newlabour', {
+            const response = await axios.post('http://10.23.0.155:/contractor/newlabour', {
                 firstName,
                 lastName,
                 phoneNumber,
@@ -62,39 +63,105 @@ function AddLabourPage() {
 
     return (
         <>
-        <Header/>
-        <Page title="Add Labour">
-            
-            <div className="add-labour-container">
-                <select className="select-dropdown" value={selectedLabor} onChange={handleDropdownChange}>
-                    <option value="">Select an option...</option>
-                    {existingLabors.map((labor, index) => (
-                        <option key={index} value={labor}>{labor}</option>
-                    ))}
-                </select>
-                <Button className="submit-button" onClick={handleExistingLabourSubmit} disabled={!selectedLabor}>Submit</Button>
-                <h3>OR</h3>
-                <Button className="register-button" onClick={handleNewLabourSubmit}>Register New Labour</Button>
-                {showRegistrationForm && (
-                    <form className="registration-form" onSubmit={handleRegistrationSubmit}>
-                        <TextBox title="First Name" hint="Enter first name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                        <TextBox title="Last Name" hint="Enter last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                        <TextBox title="Phone Number" hint="Enter phone number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                        <TextBox title="Wage Rate" hint="Enter wage rate" value={wageRate} onChange={(e) => setWageRate(e.target.value)} />
-                        <select className="wage-rate-type-dropdown" value={wageRateType} onChange={(e) => setWageRateType(e.target.value)}>
-                            <option value="">Select wage rate type...</option>
-                            <option value="hourly">Hourly</option>
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly">Monthly</option>
-                        </select>
-                        <TextBox title="Location" hint="Enter location" value={location} onChange={(e) => setLocation(e.target.value)} />
-                        <Button className="register-submit-button" type="submit">Register</Button>
-                    </form>
-                )}
-            </div>
-            
-            <Footer/>
-        </Page>
+            <Header />
+            <Grid container justifyContent="center" spacing={2} className="add-labour-container" style={{ marginTop: '20px' }}>
+                <Grid item xs={12} md={6}>
+                    <Paper variant="outlined" sx={{ p: 2 }}>
+                        <Typography variant="h5" align="center" gutterBottom>
+                            Add Labour
+                        </Typography>
+                        <FormControl fullWidth variant="outlined" margin="normal">
+                            <InputLabel id="selected-labor-label">Select an option...</InputLabel>
+                            <Select
+                                labelId="selected-labor-label"
+                                value={selectedLabor}
+                                onChange={handleDropdownChange}
+                                label="Select an option..."
+                            >
+                                <MenuItem value="">
+                                    <em>Select an option...</em>
+                                </MenuItem>
+                                {existingLabors.map((labor, index) => (
+                                    <MenuItem key={index} value={labor}>{labor}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <Button variant="contained" className="submit-button" onClick={handleExistingLabourSubmit} disabled={!selectedLabor}>
+                            Submit
+                        </Button>
+                        <Typography variant="h6" align="center" gutterBottom>
+                            OR
+                        </Typography>
+                        <Button variant="contained" className="register-button" onClick={handleNewLabourSubmit}>
+                            {showRegistrationForm ? 'Close Form' : 'Register New Labour'}
+                        </Button>
+                        {showRegistrationForm && (
+                            <form onSubmit={handleRegistrationSubmit}>
+                                <TextField
+                                    label="First Name"
+                                    fullWidth
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                />
+                                <TextField
+                                    label="Last Name"
+                                    fullWidth
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                />
+                                <TextField
+                                    label="Phone Number"
+                                    fullWidth
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={phoneNumber}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                />
+                                <TextField
+                                    label="Wage Rate"
+                                    fullWidth
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={wageRate}
+                                    onChange={(e) => setWageRate(e.target.value)}
+                                />
+                                <FormControl fullWidth variant="outlined" margin="normal">
+                                    <InputLabel id="wage-rate-type-label">Select wage rate type...</InputLabel>
+                                    <Select
+                                        labelId="wage-rate-type-label"
+                                        value={wageRateType}
+                                        onChange={(e) => setWageRateType(e.target.value)}
+                                        label="Select wage rate type..."
+                                    >
+                                        <MenuItem value="">
+                                            <em>Select wage rate type...</em>
+                                        </MenuItem>
+                                        <MenuItem value="hourly">Hourly</MenuItem>
+                                        <MenuItem value="weekly">Weekly</MenuItem>
+                                        <MenuItem value="monthly">Monthly</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <TextField
+                                    label="Location"
+                                    fullWidth
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                />
+                                <Button type="submit" variant="contained" className="register-submit-button ">
+                                    Register
+                                </Button>
+                            </form>
+                        )}
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Footer />
         </>
     );
 }

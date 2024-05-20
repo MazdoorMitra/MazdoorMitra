@@ -1,28 +1,55 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom for navigation
-import './Footer.css'; // Import CSS file for styling
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 
-function Footer() {
-    return (
-        <div className="footer-container">
-            <Link to="/contractor/dashboard" className="footer-slot">
-                <h3>Overview</h3>
-                {/* Add content for Overview slot */}
-            </Link>
-            <Link to="/labourers" className="footer-slot">
-                <h3>Labourers</h3>
-                {/* Add content for Labourers slot */}
-            </Link>
-            <Link to="/contractor/attendance" className="footer-slot">
-                <h3>Attendance</h3>
-                {/* Add content for Attendance slot */}
-            </Link>
-            <Link to="/payments" className="footer-slot">
-                <h3>Payments</h3>
-                {/* Add content for Payments slot */}
-            </Link>
-        </div>
-    );
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary">
+
+    </Typography>
+  );
 }
 
-export default Footer;
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
+export default function StickyFooter() {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+        }}
+      >
+        <CssBaseline />
+        
+        <Box
+          component="footer"
+          sx={{
+            py: 3,
+            px: 2,
+            mt: 'auto',
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[200]
+                : theme.palette.grey[800],
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography variant="body1">
+              My sticky footer can be found here.
+            </Typography>
+            <Copyright />
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+}
+

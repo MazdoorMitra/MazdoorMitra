@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
+import Avatar from '@mui/material/Avatar';
 import YourLogo from './Screenshot 2024-04-07 180733-removebg-preview.jpg'; // Import your logo
 
 const logoStyle = {
@@ -20,8 +21,24 @@ const logoStyle = {
   cursor: 'pointer',
 };
 
+// Profile link component
+function ProfileLink() {
+  return (
+    <MenuItem
+      component={Link}
+      to="/labour/profile"
+      sx={{ py: '6px', px: '12px', display: 'flex', alignItems: 'center' }}
+    >
+      <Avatar alt="User Avatar" src="/path_to_avatar_image" />
+      <Typography variant="body2" color="text.primary" sx={{ marginLeft: '10px' }}>
+        Profile
+      </Typography>
+    </MenuItem>
+  );
+}
+
 function AppAppBar({ mode, toggleColorMode }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -70,11 +87,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                 px: 0,
               }}
             >
-              {/* <img
-                src={YourLogo} // Replace with your logo
-                style={logoStyle}
-                alt="logo of your organization"
-              /> */}
                <Link to="/">
                 <img
                   src={YourLogo} // Replace with your logo
@@ -85,7 +97,7 @@ function AppAppBar({ mode, toggleColorMode }) {
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
                   component={Link}
-                  to="/contractor/dashboard"
+                  to="/labour/overview"
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
@@ -94,29 +106,11 @@ function AppAppBar({ mode, toggleColorMode }) {
                 </MenuItem>
                 <MenuItem
                   component={Link}
-                  to="/labourers"
+                  to="/labour/scheme"
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Labourers
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  component={Link}
-                  to="/contractor/attendance"
-                  // sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Attendance
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  component={Link}
-                  to="/payments"
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Payments
+                    Scheme
                   </Typography>
                 </MenuItem>
               </Box>
@@ -129,26 +123,8 @@ function AppAppBar({ mode, toggleColorMode }) {
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-              {/* <Button
-                color="primary"
-                variant="text"
-                size="small"
-                component="a"
-                href="/material-ui/getting-started/templates/sign-in/"
-                target="_blank"
-              >
-                Sign in
-              </Button> */}
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                component="a"
-                href="/contractor/login"
-                target="_blank"
-              >
-                Log Out 
-              </Button>
+              {/* Removed the Sign in and Sign up buttons */}
+              <ProfileLink /> {/* Include ProfileLink component */}
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>
               <Button
@@ -178,58 +154,23 @@ function AppAppBar({ mode, toggleColorMode }) {
                     }}
                   >
                     <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                    {/* Display profile link in mobile view */}
+                    <ProfileLink />
                   </Box>
                   <MenuItem
                     component={Link}
-                    to="/contractor/dashboard" // Update the destination path here
+                    to="/labour/overview"
                   >
                     Overview
                   </MenuItem>
                   <MenuItem
                     component={Link}
-                    to="/labourers"
+                    to="/labour/scheme"
                   >
-                    Labourers
-                  </MenuItem>
-                  <MenuItem
-                    component={Link}
-                    to="/contractor/attendance"
-                  >
-                    
-                    Attendance
-                  </MenuItem>
-                  <MenuItem
-                    component={Link}
-                    to="/payments"
-                  >
-
-                    Payments
+                    Scheme
                   </MenuItem>
                   <Divider />
-                  <MenuItem>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      component="a"
-                      href="/contractor/login"
-                      target="_blank"
-                      sx={{ width: '100%' }}
-                    >
-                      Log Out 
-                    </Button>
-                  </MenuItem>
-                  <MenuItem>
-                    {/* <Button
-                      color="primary"
-                      variant="outlined"
-                      component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
-                      target="_blank"
-                      sx={{ width: '100%' }}
-                    >
-                      Sign in
-                    </Button> */}
-                  </MenuItem>
+                  {/* Removed the Sign in and Sign up buttons */}
                 </Box>
               </Drawer>
             </Box>

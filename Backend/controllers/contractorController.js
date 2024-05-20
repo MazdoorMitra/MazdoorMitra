@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const { Contractor } = require('../models/contractor');
-// controllers/labourController.js
 const { NewLabour } = require('../models/contractor');
 const {Project} =require('../models/contractor')
 
@@ -125,7 +124,4 @@ const projects = async (req, res) => {
     }
 };
 
-
-
 module.exports = { signin, signup,newlabour, getLabourNames,createProject ,projects};
-

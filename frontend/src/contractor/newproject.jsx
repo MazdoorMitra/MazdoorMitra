@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Tile, Page, VContainer, TextBox, Button, HContainer } from "../components";
+import { TextField, Button, Grid, Typography, Paper } from '@mui/material';
 
 function NewProject() {
     const [projectName, setProjectName] = useState('');
@@ -11,7 +11,7 @@ function NewProject() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:4000/contractor/newproject', {
+        axios.post('http://10.23.0.155:4000/contractor/newproject', {
             projectName,
             projectDescription,
             supervisorName,
@@ -29,24 +29,62 @@ function NewProject() {
     };
 
     return (
-        <Page title="New Project" topbar="Project Details">
-            <VContainer>
-                <TextBox title="Project Name" hint="Enter project name" divclasses={['stdmp']} onChange={(e) => setProjectName(e.target.value)} />
-                <TextBox title="Project Description" hint="Enter project description" divclasses={['stdmp']} onChange={(e) => setProjectDescription(e.target.value)} />
-                <VContainer title="Add Supervisor " classes={['stdmp']}>
-                    <TextBox title="Supervisor Name" hint="Enter supervisor name" divclasses={['stdmp']} onChange={(e) => setSupervisorName(e.target.value)} />
-                    <TextBox title="Contact Details" hint="Enter supervisor email" divclasses={['stdmp']} onChange={(e) => setContactDetails(e.target.value)} />
-                </VContainer>
-                <Button classes={['stdmp']} onClick={handleSubmit}>
-                    Create Project
-                </Button>
-                <Link to="/contractor">
-                    <Button classes={['stdmp']} secondary>
-                        Cancel
-                    </Button>
-                </Link>
-            </VContainer>
-        </Page>
+        <Grid container justifyContent="center" spacing={2}>
+            <Grid item xs={12} md={6}>
+                <Paper variant="outlined" sx={{ p: 2 }}>
+                    <Typography variant="h5" align="center" gutterBottom>
+                        New Project
+                    </Typography>
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                            label="Project Name"
+                            fullWidth
+                            variant="outlined"
+                            margin="normal"
+                            value={projectName}
+                            onChange={(e) => setProjectName(e.target.value)}
+                        />
+                        <TextField
+                            label="Project Description"
+                            fullWidth
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                            margin="normal"
+                            value={projectDescription}
+                            onChange={(e) => setProjectDescription(e.target.value)}
+                        />
+                        <Typography variant="subtitle1" gutterBottom>
+                            Add Supervisor
+                        </Typography>
+                        <TextField
+                            label="Supervisor Name"
+                            fullWidth
+                            variant="outlined"
+                            margin="normal"
+                            value={supervisorName}
+                            onChange={(e) => setSupervisorName(e.target.value)}
+                        />
+                        <TextField
+                            label="Contact Details"
+                            fullWidth
+                            variant="outlined"
+                            margin="normal"
+                            value={contactDetails}
+                            onChange={(e) => setContactDetails(e.target.value)}
+                        />
+                        <Button variant="contained" type="submit" sx={{ mr: 2 }}>
+                            Create Project
+                        </Button>
+                        <Link to="/contractor" style={{ textDecoration: 'none' }}>
+                            <Button variant="outlined" color="secondary">
+                                Cancel
+                            </Button>
+                        </Link>
+                    </form>
+                </Paper>
+            </Grid>
+        </Grid>
     );
 }
 
