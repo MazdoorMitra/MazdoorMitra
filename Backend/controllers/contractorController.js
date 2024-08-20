@@ -75,7 +75,8 @@ const newlabour = async (req, res) => {
             firstName: firstName,
             lastName: lastName,
             wages: wages,
-            location: location
+            location: location,
+            
         });
 
         res.status(201).json({
