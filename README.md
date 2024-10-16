@@ -1,4 +1,11 @@
-﻿![](Aspose.Words.45bc1dba-a314-4732-b0ac-797b6616182d.001.jpeg) **MazdoorMitra![](Aspose.Words.45bc1dba-a314-4732-b0ac-797b6616182d.002.jpeg)**
+<table>
+  <tr>
+    <td><img src="Aspose.Words.45bc1dba-a314-4732-b0ac-797b6616182d.001.jpeg" alt="Logo 1" width="100"></td>
+    <td style="text-align: center; font-weight: bold; font-size: 24px;">MazdoorMitra</td>
+    <td><img src="Aspose.Words.45bc1dba-a314-4732-b0ac-797b6616182d.002.jpeg" alt="Logo 2" width="100"></td>
+  </tr>
+</table>
+
 
 **Project Idea**
 
@@ -38,35 +45,6 @@ Using the insights gained from the field, we have carefully developed our applic
 
 MazdoorMitra is designed to provide a seamless digital experience for contractors and laborers, making it easier for them to collaborate, track progress, and manage payments—all in real time. We are excited about bringing this solution to life and making a real impact in the field of labor management.
 
-**Financial Details**
-
-1. **Twilio (For sending confirmation messagesan and Auth)**
-- Send **5,000** per year:
-- **Cost per SMS**: ₹0.6225.
-- Total for 5,000 SMS:
-- 5,000 \* ₹0.6225 = **₹3,112.50**.
-2. **AWS (For server deployment)**.
-- Consider using **t3.micro** (**₹1,245/month** after the free tier).
-- Monthly AWS cost (for smaller instance): ₹1,245.
-- Annual AWS cost:
-- ₹1,245 \* 12 = **₹14,940/year**.
-3. **MongoDB (Data storage)**
-- Downgrade to a smaller cluster
-- Use a **M2 cluster** for minimal data usage, which costs around ₹800–₹1,500/month.
-- Monthly MongoDB cost: ₹1,200 (mid-range for an M2 cluster).
-- Annual MongoDB cost:
-- ₹1,200 \* 12 = **₹14,400/year**.![](Aspose.Words.45bc1dba-a314-4732-b0ac-797b6616182d.003.png)
-
-**Total Annual Cost Estimate (in INR):**
-
-1. **Twilio**: ₹3,112.50 (for 5,000 SMS).
-1. **AWS**: ₹14,940/year (smaller instance).
-1. **MongoDB**: ₹14,400/year (smaller cluster).
-
-**Total Annual Cost:**
-
-**₹3,112.50 + ₹14,940 + ₹14,400 = ₹32,452.50/year**.
-
 **Meet Our Team Mentor:**
 
 - **Venkat Ram Reddy Ganuthula**
@@ -96,13 +74,4 @@ MazdoorMitra is designed to provide a seamless digital experience for contractor
   Indian Institute of Technology Jodhpur
 
   <https://www.linkedin.com/in/shaikmohammedtouseef/>
-
-**Team Member 2:**
-
-- **Aditya Ranjan**
-
-  Final Year B.Tech Student
-
-  Indian Institute of Technology Jodhpur
-
-  <https://www.linkedin.com/in/aditya-ranjan-00a137235/>
+>
